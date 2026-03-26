@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Smart Storage</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+
+    /* Nav */
+    nav {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    nav .brand { font-size: 1.2rem; font-weight: bold; letter-spacing: .06em; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: #ccc; text-decoration: none; font-size: .9rem; }
+    nav ul li a:hover { color: #fff; }
+    .btn-admin {
+      background: #e63946;
+      color: #fff;
+      padding: .4rem 1.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: .85rem;
+    }
+
+    /* Hero banner */
+    .hero {
+      background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+      color: #fff;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 { font-size: 2rem; margin-bottom: .5rem; }
+    .hero p  { max-width: 700px; margin: 0 auto; opacity: .85; font-size: .95rem; line-height: 1.6; }
+
+    /* About card overlay */
+    .about-card {
+      background: rgba(0,0,0,.55);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      max-width: 680px;
+      margin: 1.5rem auto 0;
+      text-align: left;
+      font-size: .88rem;
+      line-height: 1.7;
+    }
+    .about-card h3 { text-align: center; margin-bottom: .8rem; font-size: 1rem; }
+
+    /* Devices section */
+    .devices {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1rem;
+    }
+    .devices h2 { margin-bottom: 1.2rem; color: #1b4332; font-size: 1.2rem; }
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+    }
+    .device-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.4rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      text-decoration: none;
+      color: #333;
+      transition: transform .15s, box-shadow .15s;
+      border-top: 4px solid #2d6a4f;
+    }
+    .device-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.15); }
+    .device-card .icon { font-size: 2.5rem; margin-bottom: .6rem; }
+    .device-card h3   { font-size: 1rem; margin-bottom: .3rem; }
+    .device-card span { font-size: .8rem; color: #888; }
+    .device-card .btn {
+      display: inline-block;
+      margin-top: .8rem;
+      padding: .35rem 1rem;
+      background: #2d6a4f;
+      color: #fff;
+      border-radius: 4px;
+      font-size: .8rem;
+    }
+
+    /* Latest reading panel */
+    .latest {
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1rem;
+    }
+    .latest h2 { margin-bottom: 1rem; color: #1b4332; font-size: 1.2rem; }
+    .reading-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    }
+    .reading-card .device-name { font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .metric {
+      background: #f0f7f4;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .metric .val { font-size: 1.8rem; font-weight: bold; color: #1b4332; }
+    .metric .lbl { font-size: .75rem; color: #666; margin-top: .2rem; }
+
+    .condition-badge {
+      display: inline-block;
+      padding: .4rem 1.2rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: .9rem;
+      margin-top: 1rem;
+    }
+    .Good    { background: #d4edda; color: #155724; }
+    .Average { background: #fff3cd; color: #856404; }
+    .Poor    { background: #f8d7da; color: #721c24; }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: .8rem;
+    }
+    footer a { color: #ccc; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">🌱 E-SMART STORAGE</div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="/admin/" class="btn-admin">ADMIN</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Smart Onion Storage Monitoring</h1>
+  <div class="about-card">
+    <h3>About Project</h3>
+    <p>
+      This project highlights the key features and objectives of our system —
+      a testament to the symbiosis of hardware and software in addressing contemporary
+      challenges in agriculture. By leveraging modern technology, we aspire to enhance
+      post-harvest practices, ensuring a sustainable and efficient supply chain for
+      the fundamental agricultural commodity — onions.<br><br>
+      The sensors act as sensory organs, collecting real-time data on temperature,
+      humidity, and gas concentrations. The Raspberry Pi 3B+ serves as the brain,
+      orchestrating data collection, processing, and transmission — integrating a
+      Django backend with a robust SQLite database.
+    </p>
+  </div>
+</div>
+
+<!-- Device Cards -->
+<div class="devices">
+  <h2>📦 Storage Units</h2>
+  <div class="device-grid">
+    {% for i in "1234" %}
+    <a href="/device/Device {{ i }}/" class="device-card">
+      <div class="icon">🧅</div>
+      <h3>DEVICE {{ i }}</h3>
+      <span>Storage Unit {{ i }}</span><br>
+      <span class="btn">CLICK HERE</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Latest Reading -->
+{% if latest %}
+<div class="latest">
+  <h2>📊 Latest Reading</h2>
+  <div class="reading-card">
+    <div class="device-name">Device name : {{ latest.device_id }}</div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="val">{{ latest.temperature }}</div>
+        <div class="lbl">Temperature (°C)</div>
+      </div>
+      <div class="metric">
+        <div class="val">{{ latest.humidity }}</div>
+        <div class="lbl">Humidity (%)</div>
+      </div>
+      <div class="metric">
+        <div class="val">{{ latest.gas_ppm }}</div>
+        <div class="lbl">CO₂ &amp; NH₃ (ppm)</div>
+      </div>
+      <div class="metric">
+        <div class="val">{{ latest.shelf_life }}</div>
+        <div class="lbl">Shelf Life (months)</div>
+      </div>
+    </div>
+    <span class="condition-badge {{ latest.condition }}">
+      Condition: {{ latest.condition }}
+    </span>
+    <div style="margin-top:.6rem;font-size:.8rem;color:#888;">
+      Last updated: {{ latest.timestamp }}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<footer>
+  <p>Home &nbsp;|&nbsp; About Us &nbsp;|&nbsp; Services &nbsp;|&nbsp; Contact
+  &nbsp;&nbsp;|&nbsp;&nbsp; Email: raspberrypialliance@gmail.com
+  &nbsp;|&nbsp; Phone: +91 9898444625</p>
+  <p style="margin-top:.4rem;">© 2023 SUMAN RAJ. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
